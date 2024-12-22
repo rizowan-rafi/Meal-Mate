@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import NavBar from "../shared/NavBar";
 import Footer from "../shared/Footer";
+import Home from "../Pages/Home/Home";
+import { Outlet } from "react-router-dom";
 
 const MainLayout = (props) => {
     return <>
@@ -9,7 +11,7 @@ const MainLayout = (props) => {
             <NavBar></NavBar>
         </nav>
         <main>
-            Main content
+            <Outlet></Outlet>
         </main>
         <footer className="mt-10">
             <Footer></Footer>

@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo3.png";
+import useAuth from "../hooks/useAuth";
 
 const NavBar = (props) => {
+    const { user, SignOutUser } = useAuth();
     const links = (
         <>
             <li>
-                <Link to={'/'}>Home</Link>
+                <Link to={"/"}>Home</Link>
             </li>
 
             <li>
@@ -27,6 +29,16 @@ const NavBar = (props) => {
             </li>
         </>
     );
+
+    const handleSignOut = () => {
+        SignOutUser()
+            .then(() => {
+                console.log("sign out successfully");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -67,8 +79,27 @@ const NavBar = (props) => {
                 <ul className="menu menu-horizontal px-1">{links}</ul>
             </div>
             <div className="navbar-end space-x-4">
-                <a className="btn">Login</a>
-                <a className="btn">SignUp</a>
+                {user ? (
+                    <>
+                        <img
+                            className="rounded-full w-11 h-11"
+                            src={user.photoURL}
+                            alt=""
+                        />
+                        <button onClick={handleSignOut} className="btn">
+                            SignOut
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <Link to={"/login"} className="btn">
+                            Login
+                        </Link>
+                        <Link to={"/signup"} className="btn">
+                            SignUp
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     );
