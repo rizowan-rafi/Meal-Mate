@@ -32,8 +32,8 @@ const Signup = (props) => {
         createUser(email, password)
             .then((res) => {
                 updateUser(name, photo).then(() => {
-                    console.log("register successful", res.user);
-                    setUser(res.user);
+                    // console.log("register successful", res.user);
+                    // setUser(res.user);
                     navigate("/");
                     Swal.fire({
                         position: "top-right",
@@ -44,13 +44,15 @@ const Signup = (props) => {
                     });
                 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                // console.error(err);
+            });
     };
 
     const handleGoogleLogin = () => {
         signInWithGoogle()
             .then((res) => {
-                console.log(res.user);
+                // console.log(res.user);
                 setUser(res.user);
                 navigate("/");
                 Swal.fire({
@@ -61,7 +63,9 @@ const Signup = (props) => {
                     timer: 1500,
                 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                // console.error(err);
+            });
     };
     return (
         <div className="hero bg-base-200 min-h-screen">

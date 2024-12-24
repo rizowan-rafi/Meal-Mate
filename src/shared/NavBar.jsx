@@ -13,19 +13,19 @@ const NavBar = (props) => {
             </li>
 
             <li>
-                <a>Available Foods</a>
+                <Link to={"/availablefood"}>Available Foods</Link>
             </li>
 
             <li>
-                <a>Add Food</a>
+                <Link to={"/addfood"}>Add Food</Link>
             </li>
 
             <li>
-                <a>Manage My Foods</a>
+                <Link to={"/managefood"}>Manage My Foods</Link>
             </li>
 
             <li>
-                <a>My Food Request</a>
+                <Link to={"/requestfood"}>My Food Request</Link>
             </li>
         </>
     );
@@ -33,14 +33,14 @@ const NavBar = (props) => {
     const handleSignOut = () => {
         SignOutUser()
             .then(() => {
-                console.log("sign out successfully");
+                // console.log("sign out successfully");
             })
             .catch((err) => {
-                console.log(err);
+                // console.log(err);
             });
     };
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 z-100 relative">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div
@@ -65,7 +65,7 @@ const NavBar = (props) => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[100] mt-3 w-52 p-2 shadow"
                     >
                         {links}
                     </ul>
@@ -75,8 +75,10 @@ const NavBar = (props) => {
                     <span className="hidden sm:block">MealMate</span>
                 </a>
             </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">{links}</ul>
+            <div className="navbar-center hidden z-100 relative lg:flex">
+                <ul className="menu menu-horizontal z-100 relative px-1">
+                    {links}
+                </ul>
             </div>
             <div className="navbar-end space-x-4">
                 {user ? (

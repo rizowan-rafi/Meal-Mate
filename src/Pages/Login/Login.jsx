@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Lottie from "lottie-react";
 import signin from "../../assets/Lottee/signin.json";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = (props) => {
     const { signInWithGoogle, signInUser, setUser } = useAuth();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state || "/";
     const handlelogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -17,37 +20,13 @@ const Login = (props) => {
         const password = form.password.value;
         signInUser(email, password)
             .then((res) => {
-            setUser(res.user);
-            navigate("/");
-            Swal.fire({
-                position: "top-right",
-                icon: "success",
-                title: "Login Successful",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            })
-        .catch((err) => {
-            Swal.fire({
-                position: "top-right",
-                icon: "error",
-                title: "Login Failed.",
-                text: "Invalid credentials",
-                showConfirmButton: false,
-                timer: 1500,
-            });
-            console.log(err);
-        })
-        
-        
-    };
-
-    const handleGoogleLogin = () => {
-        signInWithGoogle()
-            .then((res) => {
-                console.log(res.user);
-                setUser(res.user);
-                navigate("/");
+                // setUser(res.user);
+                // const user = {email: email};
+                // axios.post("https://food-sharing-server-nine.vercel.app/jwt", user, {
+                //     withCredentials: true,
+                // })
+                // .then(res=>console.log(res.data))
+                navigate(from);
                 Swal.fire({
                     position: "top-right",
                     icon: "success",
@@ -56,7 +35,36 @@ const Login = (props) => {
                     timer: 1500,
                 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                Swal.fire({
+                    position: "top-right",
+                    icon: "error",
+                    title: "Login Failed.",
+                    text: "Invalid credentials",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                // console.log(err);
+            });
+    };
+
+    const handleGoogleLogin = () => {
+        signInWithGoogle()
+            .then((res) => {
+                // console.log(res.user);
+                // setUser(res.user);
+                Swal.fire({
+                    position: "top-right",
+                    icon: "success",
+                    title: "Login Successful",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate(from);
+            })
+            .catch((err) => {
+                // console.error(err);
+            });
     };
     return (
         <div className="hero bg-base-200 min-h-screen">
