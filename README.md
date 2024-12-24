@@ -6,7 +6,7 @@ MealMate is a dynamic and interactive community food sharing platform aimed at r
 The purpose of MealMate is to create a platform where individuals and organizations can contribute to minimizing food waste by sharing surplus food with those in need. It promotes community engagement and sustainable living.
 
 ## Live URL
-[MealMate Live Demo]() 
+[MealMate Live Demo](https://food-sharing-client-8354b.web.app) 
 
 ## Key Features
 
