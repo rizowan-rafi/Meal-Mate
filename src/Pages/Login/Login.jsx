@@ -63,7 +63,6 @@ const Login = (props) => {
                 navigate(from);
             })
             .catch((err) => {
-                // console.error(err);
             });
     };
     return (
@@ -78,7 +77,7 @@ const Login = (props) => {
                 </div>
                 <div className="card mr-5 bg-base-100 w-full py-5 max-w-md shrink-0 shadow-2xl">
                     <h1 className="text-5xl font-bold text-center">
-                        Signin now!
+                        Signin now
                     </h1>
 
                     <form onSubmit={handlelogin} className="card-body">
