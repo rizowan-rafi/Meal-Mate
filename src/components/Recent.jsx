@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const Recent = () => {
-    // Sample cuisines
     const cuisines = [
         {
             name: "Italian",
@@ -55,16 +54,13 @@ const Recent = () => {
                 className="flex space-x-5"
                 animate={{
                     x: ["0%", "-50%"],
-                    // scaleX: [1, 1.5], // Move from start to off-screen left
                 }}
                 transition={{
-                    repeat: Infinity, // Infinite scroll
-                    duration: 10, // Adjust scroll speed
-                    ease: "linear", // Smooth continuous motion
-                    // repeatType: "loop", // Loop animation seamlessly
+                    repeat: Infinity, 
+                    duration: 10, 
+                    ease: "linear", 
                 }}
             >
-                {/* Render cuisines twice for seamless scrolling */}
                 {[...cuisines, ...cuisines, ...cuisines, ...cuisines].map(
                     (cuisine, index) => (
                         <div
