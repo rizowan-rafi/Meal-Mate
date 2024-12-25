@@ -48,7 +48,6 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setLoading(false);
             setUser(user);
             const email = { email: user?.email };
             if (user?.email) {
@@ -62,6 +61,7 @@ const AuthProvider = ({ children }) => {
                     )
                     .then((res) => {
                         // console.log(res.data)
+                        setLoading(false);
                     });
             } else {
                 axios
@@ -73,6 +73,8 @@ const AuthProvider = ({ children }) => {
                         }
                     )
                     .then((res) => {
+                        // setLoading(false);
+
                         // console.log(res.data)
                     });
             }
