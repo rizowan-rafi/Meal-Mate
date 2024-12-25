@@ -68,7 +68,7 @@ const FoodDetail = (props) => {
             });
     };
     return (
-        <div className="w-[90%] mx-auto space-y-4 lg:space-y-0 lg:flex justify-center items-center gap-4">
+        <div className="w-[90%] mx-auto space-y-4 lg:space-y-0 lg:flex justify-center items-center gap-5">
             <div>
                 <img className="h-[500px]" src={food.fphoto} alt="" />
             </div>
@@ -117,9 +117,9 @@ const FoodDetail = (props) => {
                 </button>
                 <dialog id="my_modal_1" className="modal">
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <h3 className="font-bold text-lg">Request Food</h3>
                         <p className="py-4">
-                            Press ESC key or click the button below to close
+                            Press request food button to request food or click close button to close the modal
                         </p>
                         <div className="modal-action">
                             <form className="w-full" method="dialog">
