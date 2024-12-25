@@ -16,7 +16,7 @@ const Practice = (props) => {
     });
 
     if (isPending) {
-        return <span>Loading...</span>;
+        return <span className="loading loading-spinner loading-md"></span>;
     }
 
     if (isError) {
