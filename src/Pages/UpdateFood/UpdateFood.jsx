@@ -59,7 +59,7 @@ const UpdateFood = (props) => {
     };
     return (
         <div className="w-[90%] mx-auto bg-gray-100 p-5 rounded-xl">
-            <h2 className="text-3xl font-bold ">Update Food Info</h2>
+            <h2 className="text-3xl font-bold ">Update Food Information</h2>
             <div>
                 <form onSubmit={handleUpdateFood} className="card-body">
                     {/* Food name  */}
