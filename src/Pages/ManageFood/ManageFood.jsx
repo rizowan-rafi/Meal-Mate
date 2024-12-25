@@ -65,7 +65,7 @@ const ManageFood = (props) => {
     };
     return (
         <div>
-            ManageFood : {manageFood.length}
+            <h1 className="w-[90%] mx-auto text-3xl font-medium">ManageFood : {manageFood.length}</h1>
             <div className="overflow-x-auto lg:w-[90%] mx-auto">
                 <table className="table">
                     {/* head */}
