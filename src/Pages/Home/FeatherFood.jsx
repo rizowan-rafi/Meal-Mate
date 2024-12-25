@@ -19,8 +19,8 @@ const FeatherFood = (props) => {
     }, []);
     return (
         <div>
-            <h2 className="text-3xl font-bold">
-                Featured Foods : {featureFood.length}
+            <h2 className="text-3xl font-bold py-5">
+                Featured Foods
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {featureFood.map((food) => (
