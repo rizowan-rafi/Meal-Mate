@@ -64,7 +64,6 @@ const Signup = (props) => {
                 });
             })
             .catch((err) => {
-                // console.error(err);
             });
     };
     return (
@@ -75,7 +74,7 @@ const Signup = (props) => {
                 </div>
                 <div className="card bg-base-100 w-full py-5 max-w-lg shrink-0 shadow-2xl">
                     <h1 className="text-5xl font-bold text-center">
-                        Register now!
+                        Register now
                     </h1>
 
                     <form onSubmit={handleSignUp} className="card-body">
