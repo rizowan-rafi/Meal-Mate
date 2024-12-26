@@ -44,14 +44,19 @@ const FoodDetail = (props) => {
         axios
             .post(
                 `https://food-sharing-server-nine.vercel.app/requestfood/${food._id}`,
-                updatedData
+                updatedData, {
+                    withCredentials: true,
+                }
             )
             .then((response) => {
                 // console.log(response.data);
                 const status = { fstatus: "requested" };
                 axios.patch(
                     `https://food-sharing-server-nine.vercel.app/requestedfood/${food._id}`,
-                    status
+                    status,
+                    {
+                        withCredentials: true,
+                    }
                 )
                     .then((response) => { 
                         

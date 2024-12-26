@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const RequestFood = (props) => {
     const axiosSecure = useAxiosSecure();
@@ -18,13 +19,57 @@ const RequestFood = (props) => {
                 // console.error("Error:", error);
             });
     }, []);
+
+    
+        const handleDeleteFood = (id) => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axiosSecure
+                        .delete(
+                            `/deleterequestfood/${id}`
+                        )
+                        .then((response) => {
+                            setManageFood(
+                                manageFood.filter((food) => food._id !== id)
+                            );
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                            });
+                        })
+                        .catch((error) => {
+                            // console.error("Error:", error);
+                        });
+                }
+            });
+        };
     return (
         <div>
             <h1 className="w-[90%] mx-auto text-3xl font-medium">
                 {" "}
                 Requested : {manageFood.length}
             </h1>
-
+            {manageFood.length === 0 && (
+                <div className="flex justify-center items-center h-screen">
+                    <div className="text-3xl text-center font-medium">
+                        <span className="loading loading-infinity loading-lg"></span>
+                        <div>
+                            No food items is being requested at the moment.{" "}
+                            <br /> Please request food items or wait while the
+                            data is being loaded.
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className="overflow-x-auto w-[90%] mx-auto">
                 <table className="table">
                     {/* head */}
@@ -36,6 +81,7 @@ const RequestFood = (props) => {
                             <th>User Detail</th>
                             <th>Food Status</th>
                             <th>Request Date</th>
+                            <th>Delete From Request</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,6 +150,16 @@ const RequestFood = (props) => {
                                         Delete
                                     </button> */}
                                 </td>
+                                <th>
+                                    <button
+                                        onClick={() => {
+                                            handleDeleteFood(food._id);
+                                        }}
+                                        className="btn btn-error btn-xs"
+                                    >
+                                        delete
+                                    </button>
+                                </th>
                             </tr>
                         ))}
                     </tbody>
