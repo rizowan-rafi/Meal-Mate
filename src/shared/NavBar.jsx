@@ -105,7 +105,7 @@ const NavBar = (props) => {
                 </ul>
             </div>
             <div className="navbar-end space-x-4">
-                {user ? (
+                {user ?  (
                     <>
                         <img
                             className="rounded-full w-11 h-11"
