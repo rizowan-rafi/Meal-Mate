@@ -10,11 +10,14 @@ const FoodDetail = (props) => {
     const axiosSecure = useAxiosSecure();
     const { id } = useParams();
     const [food, setFood] = useState({});
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         axiosSecure.get(`/food/${id}`).then((response) => {
             setFood(response.data);
+            setLoading(false);
         });
     }, []);
+    
     // const food = useLoaderData();
     const { user } = useAuth();
     // console.log(user.email);
@@ -44,23 +47,23 @@ const FoodDetail = (props) => {
         axios
             .post(
                 `https://food-sharing-server-nine.vercel.app/requestfood/${food._id}`,
-                updatedData, {
+                updatedData,
+                {
                     withCredentials: true,
                 }
             )
             .then((response) => {
                 // console.log(response.data);
                 const status = { fstatus: "requested" };
-                axios.patch(
-                    `https://food-sharing-server-nine.vercel.app/requestedfood/${food._id}`,
-                    status,
-                    {
-                        withCredentials: true,
-                    }
-                )
-                    .then((response) => { 
-                        
-                    })
+                axios
+                    .patch(
+                        `https://food-sharing-server-nine.vercel.app/requestedfood/${food._id}`,
+                        status,
+                        {
+                            withCredentials: true,
+                        }
+                    )
+                    .then((response) => {});
                 if (response.data.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -72,10 +75,22 @@ const FoodDetail = (props) => {
                 }
             });
     };
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="loading loading-spinner loading-lg"></div>
+            </div>
+        );
+    }
+
     return (
-        <div className="w-[90%] mx-auto space-y-4 lg:space-y-0 lg:flex justify-center items-center gap-5">
+        <div className="w-[90%] mx-auto space-y-4 lg:space-y-0 lg:flex justify-center items-center gap-5 mt-10">
             <div>
-                <img className="h-[500px]" src={food.fphoto} alt="" />
+                <img
+                    className="h-[300px] rounded-xl"
+                    src={food.fphoto}
+                    alt=""
+                />
             </div>
             <div className="space-y-2">
                 <h2 className="text-4xl font-bold">{food.fname}</h2>
@@ -113,7 +128,7 @@ const FoodDetail = (props) => {
                 </p>
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 <button
-                    className="btn btn-info btn-outline"
+                    className="btn  btn-outline border-primary text-primary hover:bg-primary"
                     onClick={() =>
                         document.getElementById("my_modal_1").showModal()
                     }
@@ -124,7 +139,8 @@ const FoodDetail = (props) => {
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">Request Food</h3>
                         <p className="py-4">
-                            Press request food button to request food or click close button to close the modal
+                            Press request food button to request food or click
+                            close button to close the modal
                         </p>
                         <div className="modal-action">
                             <form className="w-full" method="dialog">

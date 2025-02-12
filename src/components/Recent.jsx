@@ -46,26 +46,26 @@ const Recent = () => {
     ];
 
     return (
-        <div className="overflow-hidden  w-full bg-blue-100 py-10">
+        <div className="overflow-hidden  w-full bg-secondary py-10 -z-10 relative">
             <h3 className="text-3xl font-medium text-center mb-10">
                 What's your favorite cuisine?
             </h3>
             <motion.div
-                className="flex space-x-5"
+                className="flex space-x-5 "
                 animate={{
                     x: ["0%", "-50%"],
                 }}
                 transition={{
-                    repeat: Infinity, 
-                    duration: 10, 
-                    ease: "linear", 
+                    repeat: Infinity,
+                    duration: 10,
+                    ease: "linear",
                 }}
             >
                 {[...cuisines, ...cuisines, ...cuisines, ...cuisines].map(
                     (cuisine, index) => (
                         <div
                             key={index}
-                            className="flex flex-col bg-gray-200 p-3 justify-center items-center shadow-md border border-gray-200 text-center"
+                            className="flex flex-col bg-primary p-3 justify-center items-center shadow-md border border-gray-200 text-center text-background"
                         >
                             <img
                                 className="object-cover h-[100px] rounded-xl" // Set width, height, and control the object fit

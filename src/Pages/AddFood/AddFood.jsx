@@ -35,8 +35,8 @@ const AddFood = (props) => {
             });
     }
     return (
-        <div className="lg:w-[90%] mx-auto bg-gray-100 p-5 rounded-xl">
-            <h2 className="text-3xl font-bold ">Add Food</h2>
+        <div className="lg:w-[90%] mx-auto bg-secondary p-5 mt-5 rounded-xl">
+            <h2 className="text-3xl font-bold text-center">Add Food</h2>
             <div>
                 <form onSubmit={handleAddFood} className="card-body">
                     {/* Food name  */}
@@ -183,7 +183,7 @@ const AddFood = (props) => {
                     </div>
 
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Add Food</button>
+                        <button className="btn btn-primary bg-primary text-background">Add Food</button>
                     </div>
                 </form>
             </div>

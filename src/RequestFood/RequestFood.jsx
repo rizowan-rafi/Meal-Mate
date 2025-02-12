@@ -8,17 +8,26 @@ import Swal from "sweetalert2";
 const RequestFood = (props) => {
     const axiosSecure = useAxiosSecure();
     const [manageFood, setManageFood] = useState([]);
+    const [loading,setLoading] = useState(true);
     const { user } = useAuth();
     useEffect(() => {
         axiosSecure
             .get(`/requestfood?email=${user.email}`)
             .then((response) => {
                 setManageFood(response.data);
+                setLoading(false);
             })
             .catch((error) => {
                 // console.error("Error:", error);
             });
     }, []);
+                if (loading) {
+                    return (
+                        <div className="flex justify-center items-center h-screen">
+                            <div className="loading loading-spinner loading-lg"></div>
+                        </div>
+                    );
+                }
 
     
         const handleDeleteFood = (id) => {
@@ -53,8 +62,8 @@ const RequestFood = (props) => {
             });
         };
     return (
-        <div>
-            <h1 className="w-[90%] mx-auto text-3xl font-medium">
+        <div className=" relative -z-10">
+            <h1 className="w-[90%] mx-auto text-3xl font-medium mt-10">
                 {" "}
                 Requested : {manageFood.length}
             </h1>

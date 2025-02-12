@@ -110,13 +110,15 @@ const Login = (props) => {
                             />
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary bg-primary text-background">
+                                Login
+                            </button>
                         </div>
                         <div>
                             <p className="text-center text-sm text-gray-600">
                                 Doesn't have an account?{" "}
                                 <Link
-                                    className="btn btn-outline btn-info ml-3"
+                                    className="btn btn-outline ml-3 border-primary text-primary hover:bg-primary hover:text-background transition ease-out duration-300"
                                     to={"/signup"}
                                 >
                                     Register
@@ -128,7 +130,7 @@ const Login = (props) => {
                     <div className="flex justify-center">
                         <button
                             onClick={handleGoogleLogin}
-                            className="flex items-center btn btn-info btn-outline justify-center"
+                            className="flex items-center btn   border-primary text-primary hover:bg-primary hover:text-background justify-center transition ease-out duration-300"
                         >
                             <span>
                                 <FaGoogle></FaGoogle>

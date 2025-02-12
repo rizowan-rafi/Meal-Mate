@@ -5,25 +5,42 @@ import Food from "../Food/Food";
 
 const AvailableFood = (props) => {
     const [layout, setLayout] = useState(3);
+    const [loading,setLoading] = useState(true);
     const [availableFood, setAvailableFood] = useState([]);
     const [allFoods, setAllFoods] = useState([]);
     const [sResult, setSResult] = useState(null);
+
     useEffect(() => {
         axios
             .get("https://food-sharing-server-nine.vercel.app/availablefoods")
             .then((response) => {
                 setAvailableFood(response.data);
                 setAllFoods(response.data);
+                setLoading(false);
             })
             .catch((error) => {
                 // console.error("Error fetching available foods: ", error);
             });
     }, []);
+        if (loading) {
+                return (
+                    <div className="flex justify-center items-center h-screen">
+                        <div className="loading loading-spinner loading-lg"></div>
+                    </div>
+                );
+        }
 
     const handleLayout = () => {
         if (layout === 3) setLayout(2);
         else setLayout(3);
     };
+
+const handleSort = () => {
+    const sortedFoods = [...availableFood].sort(
+        (a, b) => b.fquantity - a.fquantity
+    );
+    setAvailableFood(sortedFoods);
+};
 
     const handleSearch = (e) => {
         const searchValue = e.target.value.toLowerCase();
@@ -41,12 +58,23 @@ const AvailableFood = (props) => {
         }
     };
     return (
-        <div className="w-[90%] mx-auto">
+        <div className="w-[90%] mx-auto ">
             {" "}
             {/* <div>AvailableFood : {availableFood.length}</div> */}
-            <button onClick={handleLayout} className="btn py-5 hidden lg:block">
-                Change Layout
-            </button>
+            <div className="flex">
+                <button
+                    onClick={handleLayout}
+                    className="btn  mt-10 hidden bg-primary text-background lg:block"
+                >
+                    Change Layout
+                </button>
+                <button
+                    onClick={handleSort}
+                    className="btn  mt-10 hidden bg-primary text-background lg:block"
+                >
+                    Sort By Quantity
+                </button>   
+            </div>
             <div className="py-5">
                 <label className="input input-bordered flex items-center gap-2">
                     <input

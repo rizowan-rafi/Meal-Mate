@@ -9,6 +9,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const ManageFood = (props) => {
     const [manageFood, setManageFood] = useState([]);
     const { user } = useAuth();
+    const [loading,setLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         // axios
@@ -26,11 +27,19 @@ const ManageFood = (props) => {
             .get(`/managefood?email=${user.email}`)
             .then((response) => {
                 setManageFood(response.data);
+                setLoading(false);
             })
             .catch((error) => {
                 // console.error("Error:", error);
             });
     }, []);
+            if (loading) {
+                return (
+                    <div className="flex justify-center items-center h-screen">
+                        <div className="loading loading-spinner loading-lg"></div>
+                    </div>
+                );
+            }
 
     const handleDeleteFood = (id) => {
         Swal.fire({
@@ -64,8 +73,8 @@ const ManageFood = (props) => {
         });
     };
     return (
-        <>
-            <h1 className="w-[90%] mx-auto text-3xl font-medium">
+        <div className="relative -z-10">
+            <h1 className="w-[90%] mx-auto text-3xl font-medium mt-10">
                 ManageFood : {manageFood.length}
             </h1>
             {manageFood.length === 0 && (
@@ -81,7 +90,7 @@ const ManageFood = (props) => {
             )}
             <div>
                 <div className="overflow-x-auto lg:w-[90%] mx-auto">
-                    <table className="table">
+                    <table className="table table-sm">
                         {/* head */}
                         <thead>
                             <tr>
@@ -163,7 +172,7 @@ const ManageFood = (props) => {
                     </table>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

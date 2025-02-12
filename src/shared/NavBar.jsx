@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo3.png";
@@ -6,26 +6,43 @@ import useAuth from "../hooks/useAuth";
 
 const NavBar = (props) => {
     const { user, SignOutUser } = useAuth();
+    // const [theme, setTheme] = useState(
+    //     localStorage.getItem('theme') || 'mytheme'
+    // )
+    
+    // useEffect(() => {
+    //     localStorage.setItem('theme', theme)
+    //     const localTheme = localStorage.getItem('theme')
+    //     document.querySelector('html').setAttribute('data-theme', localTheme)
+    // }, [theme])
+
+    // const toggleTheme = () => {
+    //     theme === "mytheme" ? setTheme("darktheme") : setTheme("mytheme");
+    //  }
+    // const toggleTheme = () => { }
     const links = (
         <>
-            <li>
+            <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/"}>Home</Link>
             </li>
 
-            <li>
+            <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/availablefood"}>Available Foods</Link>
             </li>
 
-            <li>
+            <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/addfood"}>Add Food</Link>
             </li>
 
-            <li>
+            <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/managefood"}>Manage My Foods</Link>
             </li>
 
-            <li>
+            <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/requestfood"}>My Food Request</Link>
+            </li>
+            <li>
+
             </li>
         </>
     );
@@ -38,9 +55,12 @@ const NavBar = (props) => {
             .catch((err) => {
                 // console.log(err);
             });
-    };
+    }; 
+   
+
+    
     return (
-        <div className="navbar bg-base-100 z-100 relative">
+        <div className="navbar   bg-secondary     z-100 relative bg-opacity-80   px-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div
@@ -71,8 +91,12 @@ const NavBar = (props) => {
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">
-                    <img src={logo} alt="" />
-                    <span className="hidden sm:block">MealMate</span>
+                    <Link to={"/"}>
+                        <img src={logo} alt="" />
+                    </Link>
+                    <span className="hidden sm:block">
+                        Meal<span className="text-primary">Mate</span>
+                    </span>
                 </a>
             </div>
             <div className="navbar-center hidden z-100 relative lg:flex">
@@ -88,20 +112,30 @@ const NavBar = (props) => {
                             src={user.photoURL}
                             alt=""
                         />
-                        <button onClick={handleSignOut} className="btn">
+                        <button
+                            onClick={handleSignOut}
+                            className="btn border-primary bg-transparent  border-2 text-text hover:bg-accent hover:text-background transition ease-out duration-500"
+                        >
                             SignOut
                         </button>
                     </>
                 ) : (
                     <>
-                        <Link to={"/login"} className="btn">
+                        <Link
+                            to={"/login"}
+                            className="btn border-primary bg-transparent  border-2 text-text hover:bg-accent hover:text-background transition ease-out duration-500"
+                        >
                             Login
                         </Link>
-                        <Link to={"/signup"} className="btn">
+                        <Link
+                            to={"/signup"}
+                            className="btn border-primary bg-transparent  border-2 text-text hover:bg-accent hover:text-background transition ease-out duration-500"
+                        >
                             SignUp
                         </Link>
                     </>
                 )}
+                
             </div>
         </div>
     );

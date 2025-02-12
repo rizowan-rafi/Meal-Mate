@@ -16,6 +16,12 @@ import axios from "axios";
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState('light');
+    
+    // const handleTheme = () => {
+    //     setTheme(theme === 'light'? 'dark' : 'light');
+    //     // document.body.classList.toggle('dark');
+    // }
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -96,6 +102,8 @@ const AuthProvider = ({ children }) => {
         setLoading,
         setUser,
         loading,
+        theme,
+        setTheme,
     };
     return (
         <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -23,19 +23,19 @@ const Practice = (props) => {
         return <span>Error: {error.message}</span>;
     }
     return (
-        <div className="bg-yellow-200 my-10 py-5">
+        <div className="bg-secondary my-10 py-5">
             <h2 className="text-3xl font-medium text-center py-3">
                 Recently Viewed Foods
             </h2>
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                className="flex flex-wrap items-center w-[90%] mx-auto justify-center gap-4"
+                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 items-center w-[95%] mx-auto justify-center gap-4"
             >
                 {data.map((food) => (
                     <div
                         key={food._id}
-                        className="flex-1  space-y-3 h-[250px] p-2 rounded-xl my-2"
+                        className="  space-y-3 h-[250px] p-2 rounded-xl my-2"
                     >
                         <img
                             src={food.fphoto}
@@ -43,7 +43,7 @@ const Practice = (props) => {
                             alt=""
                         />
                         <div>
-                            <h3 className=" font-semibold">{food.fname}</h3>
+                            <h3 className=" font-semibold ">{food.fname}</h3>
                             <p className="text-sm hidden lg:block">
                                 {food.fnote}
                             </p>
