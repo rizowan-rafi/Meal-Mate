@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import logo from '../assets/logo3.png'
 const Footer = (props) => {
     return (
-        <footer className="px-4 divide-y bg-secondary ">
+        <footer className="px-4 divide-y bg-secondary">
             <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
                 <div className="lg:w-1/3 lg:ml-5">
                     <a
