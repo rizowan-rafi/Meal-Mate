@@ -12,7 +12,8 @@ const Login = (props) => {
     const { signInWithGoogle, signInUser, setUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state || "/";
+    const from = location?.state || "/";
+
     const handlelogin = (e) => {
         e.preventDefault();
         const form = e.target;

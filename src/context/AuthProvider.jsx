@@ -33,6 +33,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, provider);
     };
+    
 
     const updateUser = (name, photo) => {
         return updateProfile(auth.currentUser, {
