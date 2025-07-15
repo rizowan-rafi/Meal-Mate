@@ -12,7 +12,7 @@ const RequestFood = (props) => {
     const { user } = useAuth();
     useEffect(() => {
         axiosSecure
-            .get(`/requestfood?email=${user.email}`)
+            .get(`/requestfoods?email=${user.email}`)
             .then((response) => {
                 setManageFood(response.data);
                 setLoading(false);
@@ -62,7 +62,7 @@ const RequestFood = (props) => {
             });
         };
     return (
-        <div className=" relative -z-10">
+        <div className=" ">
             <h1 className="w-[90%] mx-auto text-3xl font-medium mt-10">
                 {" "}
                 Requested : {manageFood.length}
@@ -79,7 +79,7 @@ const RequestFood = (props) => {
                     </div>
                 </div>
             )}
-            <div className="overflow-x-auto w-[90%] mx-auto">
+            <div className="overflow-x-auto w-[90%]  mx-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -127,9 +127,9 @@ const RequestFood = (props) => {
                                     <span>{food.uemail}</span>
                                 </td>
                                 <td>
-                                    {food.fstatus === "available" ? (
+                                    {food.fstatus === "approved" ? (
                                         <span className="badge badge-success badge-sm">
-                                            Available
+                                            Approved
                                         </span>
                                     ) : (
                                         <span className="badge badge-error badge-sm">
@@ -142,33 +142,13 @@ const RequestFood = (props) => {
                                         {food.rdate}
                                     </span>
 
-                                    {/* <button
-                                        className="btn btn-ghost"
-                                        onClick={() => {
-                                            axios
-                                               .delete(`https://food-sharing-server-nine.vercel.app/requestfood/${food._id}`)
-                                               .then((response) => {
-                                                    console.log(response);
-                                                    window.location.reload();
-                                                })
-                                               .catch((error) => {
-                                                    console.error("Error:", error);
-                                                });
-                                        }}
-                                    >
-                                        Delete
-                                    </button> */}
+                        
                                 </td>
-                                <th>
-                                    <button
-                                        onClick={() => {
-                                            handleDeleteFood(food._id);
-                                        }}
-                                        className="btn btn-error btn-xs"
-                                    >
-                                        delete
+                                <td>
+                                    <button className="btn btn-error btn-xs font-medium" onClick={() => handleDeleteFood(food._id)}>
+                                        Delete
                                     </button>
-                                </th>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

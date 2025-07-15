@@ -6,6 +6,15 @@ import useAuth from "../hooks/useAuth";
 
 const NavBar = (props) => {
     const { user, SignOutUser } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        if (user?.email === "rizowanrafi71@gmail.com") {
+            setIsAdmin(true);
+        } else {
+            setIsAdmin(false);
+        }
+    }, [user]);
     // const [theme, setTheme] = useState(
     //     localStorage.getItem('theme') || 'mytheme'
     // )
@@ -41,9 +50,13 @@ const NavBar = (props) => {
             <li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
                 <Link to={"/requestfood"}>My Food Request</Link>
             </li>
-            <li>
 
-            </li>
+            {
+                isAdmin && (<li className="text-text font-bold hover:text-background hover:bg-primary hover:font-semibold rounded-xl transition ease-linear duration-300">
+                <Link to={"/dashboard"}>Dashboard</Link>
+            </li>)
+            }
+            
         </>
     );
 

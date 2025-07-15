@@ -11,6 +11,12 @@ import ManageFood from "../Pages/ManageFood/ManageFood";
 import RequestFood from "../RequestFood/RequestFood";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
 import Error from "../Pages/Error/Error";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import DashHome from "../Dashboard/DashHome";
+import PendingFood from "../Dashboard/PendingFood";
+import Allfoods from "../Dashboard/Allfoods";
+import Requested from "../Dashboard/Requested";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -82,10 +88,36 @@ const router = createBrowserRouter([
             },
         ],
     },
-    // {
-    //     path: "*",
-    //     element: <Error></Error>,
-    // }
+    {
+        path: "/dashboard",
+        element: (
+            <AdminRoute>
+                <DashboardLayout></DashboardLayout>
+            </AdminRoute>
+        ),
+        children: [
+            {
+                path: "/dashboard",
+                element: <DashHome></DashHome>,
+            },
+            {
+                path: "/dashboard/pendingfood",
+                element: <PendingFood></PendingFood>,
+            },
+            {
+                path: "/dashboard/allfood",
+                element: <Allfoods></Allfoods>,
+            },
+            {
+                path: "/dashboard/requestfood",
+                element: <Requested></Requested>,
+            },
+        ],
+    },
+    {
+        path: "*",
+        element: <Error></Error>,
+    },
 ]);
 
 export default router;

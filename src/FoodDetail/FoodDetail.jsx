@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import Swal from "sweetalert2";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const FoodDetail = (props) => {
@@ -11,13 +10,14 @@ const FoodDetail = (props) => {
     const { id } = useParams();
     const [food, setFood] = useState({});
     const [loading, setLoading] = useState(true);
+    const [quantity, setQuantity] = useState(0);
     useEffect(() => {
         axiosSecure.get(`/food/${id}`).then((response) => {
             setFood(response.data);
             setLoading(false);
         });
     }, []);
-    
+
     // const food = useLoaderData();
     const { user } = useAuth();
     // console.log(user.email);
@@ -32,6 +32,15 @@ const FoodDetail = (props) => {
 
     const handleRequestFood = () => {
         // console.log("requestFood");
+        if (parseInt(food.fquantity) < parseInt(quantity)) {
+            Swal.fire({
+                title: "Not Enough Quantity",
+                text: `Only ${food.fquantity} item(s) are available. Please reduce your requested amount.`,
+                icon: "error",
+            });
+
+            return;
+        }
         const updatedData = {
             fstatus: "requested",
             uname: user.username,
@@ -43,6 +52,9 @@ const FoodDetail = (props) => {
             fdate: food.fdate,
             fname: food.fname,
             id: food._id,
+            fquantity: quantity,
+            aquantity: food.fquantity,
+            flocation: food.flocation,
         };
         axios
             .post(
@@ -54,7 +66,7 @@ const FoodDetail = (props) => {
             )
             .then((response) => {
                 // console.log(response.data);
-                const status = { fstatus: "requested" };
+                const status = { fstatus: "available" };
                 axios
                     .patch(
                         `https://food-sharing-server-nine.vercel.app/requestedfood/${food._id}`,
@@ -127,14 +139,19 @@ const FoodDetail = (props) => {
                     {food.demail}
                 </p>
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button
-                    className="btn  btn-outline border-primary text-primary hover:bg-primary"
-                    onClick={() =>
-                        document.getElementById("my_modal_1").showModal()
-                    }
-                >
-                    Request Food
-                </button>
+                {
+                    food.fstatus === "available" && (
+                        <button
+                            className="btn  btn-outline border-primary text-primary hover:bg-primary"
+                            onClick={() =>
+                                document.getElementById("my_modal_1").showModal()
+                            }
+                        >
+                            Request Food
+                        </button>
+                    )
+                }
+                
                 <dialog id="my_modal_1" className="modal">
                     <div className="modal-box">
                         <h3 className="font-bold text-lg">Request Food</h3>
@@ -186,10 +203,12 @@ const FoodDetail = (props) => {
                                         </span>
                                     </label>
                                     <input
-                                        type="number"
+                                        type="text"
                                         placeholder="Food Quantity"
                                         name="fquantity"
-                                        value={food.fquantity}
+                                        onChange={(e) =>
+                                            setQuantity(e.target.value)
+                                        }
                                         className="input input-bordered"
                                         required
                                     />

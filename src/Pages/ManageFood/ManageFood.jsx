@@ -73,7 +73,7 @@ const ManageFood = (props) => {
         });
     };
     return (
-        <div className="relative -z-10">
+        <div className="">
             <h1 className="w-[90%] mx-auto text-3xl font-medium mt-10">
                 ManageFood : {manageFood.length}
             </h1>
@@ -82,8 +82,9 @@ const ManageFood = (props) => {
                     <div className="text-3xl text-center font-medium">
                         <span className="loading loading-infinity loading-lg"></span>
                         <div>
-                            No food items available at the moment. <br /> Please add
-                            food items or wait while the data is being loaded.
+                            No food items available at the moment. <br /> Please
+                            add food items or wait while the data is being
+                            loaded.
                         </div>
                     </div>
                 </div>
@@ -141,6 +142,10 @@ const ManageFood = (props) => {
                                         {food.fstatus === "available" ? (
                                             <span className="badge badge-success badge-sm">
                                                 Available
+                                            </span>
+                                        ) : food.fstatus === "pending" ? (
+                                            <span className="badge badge-warning badge-sm">
+                                                Pending
                                             </span>
                                         ) : (
                                             <span className="badge badge-error badge-sm">

@@ -11,6 +11,7 @@ const AddFood = (props) => {
                 const formData = new FormData(e.target);
         const newFood = Object.fromEntries(formData.entries());
         newFood.fquantity = parseInt(newFood.fquantity);
+        newFood.fstatus = "pending";
         // console.log(newFood);
 
         axios.post("https://food-sharing-server-nine.vercel.app/addfood", newFood, {
@@ -24,7 +25,7 @@ const AddFood = (props) => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "New Food Added",
+                        title: "Your request is accepted",
                         showConfirmButton: false,
                         timer: 1500,
                     });
