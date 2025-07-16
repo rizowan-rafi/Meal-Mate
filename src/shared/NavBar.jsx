@@ -9,7 +9,7 @@ const NavBar = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        if (user?.email === "rizowanrafi71@gmail.com") {
+        if (user?.email === "abir64335@gmail.com") {
             setIsAdmin(true);
         } else {
             setIsAdmin(false);

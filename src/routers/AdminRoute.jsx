@@ -12,7 +12,7 @@ const AdminRoute = ({children}) => {
             return <span className="loading loading-bars loading-lg"></span>;
         }
 
-        if (user && user.email === "rizowanrafi71@gmail.com") {
+        if (user && user.email === "abir64335@gmail.com") {
             return children;
         }
 

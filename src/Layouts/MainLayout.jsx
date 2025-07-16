@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 
 const MainLayout = (props) => {
     const { theme } = useAuth();
-    console.log(theme);
+    // console.log(theme);
     return (
         <div
             className={`${theme === "dark" ? "dark" : ""} `}

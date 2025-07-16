@@ -30,7 +30,7 @@ const handleApprove = async (id) => {
         const data = await response.json();
 
         if (data.success) {
-            console.log("Food status updated successfully");
+            // console.log("Food status updated successfully");
             // Optionally refresh data or show a success toast
             Swal.fire({
                 position: "center",
